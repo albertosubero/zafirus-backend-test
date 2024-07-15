@@ -1,9 +1,10 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -23,7 +24,7 @@ export class ProductsController {
   @Get(':id')
   async getProductById(@Param('id') id: string) {
     const productFound = await this.productsService.getProductById(Number(id));
-    if (!productFound) throw new BadRequestException('Product does not exist');
+    if (!productFound) throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
     return productFound;
   }
 
@@ -37,7 +38,7 @@ export class ProductsController {
     try {
       return await this.productsService.updateProduct(Number(id), data);
     } catch (error) {
-      throw new BadRequestException('Product does not exist');
+      throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
     }
   }
 
@@ -46,7 +47,7 @@ export class ProductsController {
     try {
       return await this.productsService.deleteProduct(Number(id));
     } catch (error) {
-      throw new BadRequestException('Product does not exist');
+      throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
     }
   }
 }
