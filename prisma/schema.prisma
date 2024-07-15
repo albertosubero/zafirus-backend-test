@@ -29,7 +29,7 @@ model Products {
   name String @db.VarChar(100)
   category Categories @relation(fields: [category_id], references: [id])
   category_id Int
-  price Decimal @mysql.Decimal(10, 2)
+  price Decimal @db.Decimal(10, 2)
   size Size @default(SMALL)
   createdAt DateTime @default(now()) @db.DateTime(6)
   updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
