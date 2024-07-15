@@ -16,6 +16,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const request = ctx.getRequest();
 
     const status = exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+    console.log("🚀 ~ ResponseInterceptor ~ errorHandler ~ exception.getResponse():", exception)
 
     response.status(status).json({
       statusCode: status,

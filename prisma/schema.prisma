@@ -19,6 +19,8 @@ model Categories {
   description String @db.VarChar(255)
   active Boolean @default(true)
   products Products[]
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
 }
 
 model Products {
@@ -29,6 +31,8 @@ model Products {
   category_id Int
   price Decimal
   size Size @default(SMALL)
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.DateTime(6)
 }
 
 enum Size {
