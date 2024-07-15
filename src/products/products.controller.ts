@@ -15,12 +15,13 @@ import { ProductsService } from './products.service';
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
-
+  // --- Get All products list --- //
   @Get()
   async getAllProducts() {
     return this.productsService.getAllProducts();
   }
 
+  // --- Get product details by id --- //
   @Get('detail/:id')
   async getProductById(@Param('id') id: string) {
     const productFound = await this.productsService.getProductById(Number(id));
@@ -28,11 +29,13 @@ export class ProductsController {
     return productFound;
   }
 
+  // --- Creaate single product --- //
   @Post()
   async createProduct(@Body() data: Products) {
     return this.productsService.createProduct(data);
   }
 
+  // --- Update product by id --- //
   @Put(':id')
   async updateProduct(@Param('id') id: string, @Body() data: Products) {
     try {
@@ -42,6 +45,7 @@ export class ProductsController {
     }
   }
 
+  // --- Delete product by id --- //
   @Delete(':id')
   async deleteProduct(@Param('id') id: string) {
     try {
@@ -51,8 +55,15 @@ export class ProductsController {
     }
   }
 
+  // --- Get products with LARGE or MEDIUM size --- //
   @Get('size/')
-  async getProductsByActiveCategory() {
+  async getProductsBySize() {
     return this.productsService.getProductsBySize();
+  }
+
+  // --- Get products with active category --- //
+  @Get('active/')
+  async getProductsByActiveCategory() {
+    return this.productsService.getProductsByActiveCategory();
   }
 }
