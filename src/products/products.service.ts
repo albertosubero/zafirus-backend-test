@@ -40,4 +40,12 @@ export class ProductsService {
       },
     });
   }
+
+  async getProductsBySize(): Promise<Products[]> {
+    return this.prisma.products.findMany({
+      where: {
+        size: "LARGE" || "MEDIUM"
+      }
+    })
+  }
 }

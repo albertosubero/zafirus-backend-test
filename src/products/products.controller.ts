@@ -21,7 +21,7 @@ export class ProductsController {
     return this.productsService.getAllProducts();
   }
 
-  @Get(':id')
+  @Get('detail/:id')
   async getProductById(@Param('id') id: string) {
     const productFound = await this.productsService.getProductById(Number(id));
     if (!productFound) throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
@@ -49,5 +49,10 @@ export class ProductsController {
     } catch (error) {
       throw new HttpException('Product does not exist', HttpStatus.NOT_FOUND);
     }
+  }
+
+  @Get('size/')
+  async getProductsByActiveCategory() {
+    return this.productsService.getProductsBySize();
   }
 }

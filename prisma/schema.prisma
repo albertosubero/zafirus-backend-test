@@ -18,12 +18,14 @@ model Categories {
   name String @db.VarChar(100)
   description String @db.VarChar(255)
   active Boolean @default(true)
+  products Products[]
 }
 
 model Products {
   id Int @id @default(autoincrement())
   code String @unique @db.VarChar(30)
   name String @db.VarChar(100)
+  category Categories @relation(fields: [category_id], references: [id])
   category_id Int
   price Decimal
   size Size @default(SMALL)
